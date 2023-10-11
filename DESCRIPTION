@@ -1,0 +1,22 @@
+Package: murlib.cfmatrix
+Title: Collaborative Filter Matrix Utils
+Version: 0.0.0.9000
+Authors@R: 
+    person(
+		"Murat", "Tasan",
+		email = "mmuurr@gmail.com",
+		role = c("aut", "cre"),
+        comment = c(ORCID = "0000-0002-8155-2565")
+	)
+Description: Common calculations and transformations used in collaborative filter code.
+			 Useful for other matrix-heavy code, too.
+License: MIT + file LICENSE
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.3
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
+Imports: 
+    base (>= 4.2.2),
+    Matrix (>= 1.5.1)
