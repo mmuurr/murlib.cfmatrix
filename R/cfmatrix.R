@@ -37,26 +37,26 @@ vec_lpnorm <- function(vec, p = 1) {
 }
 
 #' @export
-mat_dim_lpnorms <- function(mat, dim = 2, p = 1) {
+mat_margin_lpnorms <- function(mat, p = 1, margin = 2) {
   f_sums <-
-    if (dim == 1) {
+    if (margin == 1) {
       rowSums
-    } else if (dim == 2) {
+    } else if (margin == 2) {
       colSums
     } else {
-      stop("not a valid dim")
+      stop("not a valid margin")
     }
   mat |> abs() |> pow(p) |> f_sums() |> pow(1/p)
 }
 
 #' @export
 mat_col_lpnorms <- function(mat, p = 1) {
-  mat_dim_lpnorms(mat, dim = 2, p = p)
+  mat_margin_lpnorms(mat, p, 2)
 }
 
 ## Earlier version of mat_row_lpnorms before deciding to just use the col method on t(mat).
 ## mat_row_lpnorms <- function(mat, p = 1) {
-##   mat_dim_lpnorms(mat, dim = 1, p = p)
+##   mat_margin_lpnorms(mat, p, 1)
 ## }
 
 #' @export
@@ -82,6 +82,17 @@ mat_row_lpnormalize <- function(mat, p = 1) {
 #' @export
 mat_col_lpnormalize <- function(mat, p = 1) {
   mat %*% Matrix::Diagonal(x = 1 / mat_col_lpnorms(mat, p))
+}
+
+#' @export
+mat_margin_lpnormalize <- function(mat, p = 1, margin = 2) {
+  if (margin == 1) {
+    return(mat_row_lpnormalize(mat, p))
+  }
+  if (margin == 2) {
+    return(mat_col_lpnormalize(mat, p))
+  }
+  stop("margin must be 1 or 2")
 }
 
 
@@ -113,7 +124,6 @@ vec_cos_sim <- function(vec_x, vec_y) {
   numer / denom
 }
 
-
 #' @export
 mat_row_cos_sim <- function(mat_l, mat_r = mat_l) {
   numer <- tcrossprod(mat_l, mat_r)
@@ -132,3 +142,9 @@ mat_col_cos_sim <- function(mat_l, mat_r = mat_l) {
   numer / denom
 }
 
+#' @export
+mat_margin_cos_sim <- function(mat_l, mat_r = mat_l, margin = 2) {
+  if (margin == 1) return(mat_row_cos_sim(mat_l, mat_r))
+  if (margin == 2) return(mat_col_cos_sim(mat_l, mat_r))
+  stop("margin must be either 1 or 2")
+}

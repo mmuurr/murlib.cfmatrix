@@ -4,12 +4,12 @@
 \name{murlib.cfmatrix-package}
 \alias{murlib.cfmatrix}
 \alias{murlib.cfmatrix-package}
-\title{murlib.cfmatrix: What the Package Does (One Line, Title Case)}
+\title{murlib.cfmatrix: Collaborative Filter Matrix Utils}
 \description{
-What the package does (one paragraph).
+Common calculations and transformations used in collaborative filter code. Useful for other matrix-heavy code, too.
 }
 \author{
-\strong{Maintainer}: First Last \email{first.last@example.com} (\href{https://orcid.org/YOUR-ORCID-ID}{ORCID})
+\strong{Maintainer}: Murat Tasan \email{mmuurr@gmail.com} (\href{https://orcid.org/0000-0002-8155-2565}{ORCID})
 
 }
 \keyword{internal}
